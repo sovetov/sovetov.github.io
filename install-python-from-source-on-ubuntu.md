@@ -14,12 +14,14 @@ There may emerge some problems and questions though:
 - Where do you place source code?
 - Do you need to run `make install`?
 
-# Dependencies for Tkinter and sqlite3
+# Dependencies for Tkinter, sqlite3 and others
 
 ```
 sudo apt-get install tk8.6-dev  # For Tkinter. (tcl8.6-dev is dependency).
 sudo apt-get install libsqlite3-dev  # For sqlite3.
 ```
+
+There are another modules, e.g. dbm and gdbm, for which other dependencies must be installed. 
 
 # Install to `/usr/local/`
 
