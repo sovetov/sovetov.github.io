@@ -4,4 +4,6 @@ title: Home
 
 # Welcome to my blog
 
-It's currently under maintenance. Content will appear soon.
+Here are some articles:
+
+- [Install Python from source on Ubuntu](/install-python-from-source-on-ubuntu.html).
