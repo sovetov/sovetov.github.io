@@ -39,3 +39,9 @@ sudo tar -xvf Python-3.6.1.tar.xz -C /usr/local/
 It's best practice to use virtual environment. (No third-party packages in Python `site-packages`, no version conflicts.)
 
 Don't meddle with system Python interpreters, other software may rely on particular version of system Python. For everyday scripting, system Python is usually enough.
+
+To create virtual environment, use absolute path to Python:
+
+```
+/usr/local/Python3.6.1/bin/python -m venv path/to/env
+```
