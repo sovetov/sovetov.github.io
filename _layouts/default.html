@@ -2,11 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Home Page</title>
-		<title>George Sovetov's blog</title>
+		<title>{{ page.title }} &mdhash; George Sovetov's blog</title>
 		<meta name="author" content="George Sovetov">
-		<meta name="description" content="Blog on various aspects of software engineering">
-		<meta name="keywords" content="{{ page.description }}">
+		<meta name="description" content="Blog on various aspects of software engineering {{ page.description }}">
+		<meta name="keywords" content="software engineering, {{ page.keywords }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<style>
 			nav > ul { list-style-type: none; margin: 0; padding: 0; }
