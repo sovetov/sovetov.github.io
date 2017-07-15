@@ -14,7 +14,9 @@ There may emerge some problems and questions though:
 - Where do you place source code?
 - Do you need to run `make install`?
 
-# Dependencies for Tkinter, sqlite3 and others
+Python 3.6.1 will be used as an example.
+
+## Dependencies for Tkinter, sqlite3 and others
 
 ```
 sudo apt-get install tk8.6-dev  # For Tkinter. (tcl8.6-dev is dependency).
@@ -23,7 +25,7 @@ sudo apt-get install libsqlite3-dev  # For sqlite3.
 
 There are another modules, e.g. dbm and gdbm, for which other dependencies must be installed. 
 
-# Install to `/usr/local/`
+## Install to `/usr/local/`
 
 Install to `/usr/local/` as prescribed at https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s09.html.
 
@@ -36,7 +38,7 @@ wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz
 sudo tar -xvf Python-3.6.1.tar.xz -C /usr/local/
 ```
 
-# Don't install if Python will be used from venv (virtual environment)
+## Don't install if Python will be used from venv (virtual environment)
 
 It's best practice to use virtual environment. (No third-party packages in Python `site-packages`, no version conflicts.)
 
