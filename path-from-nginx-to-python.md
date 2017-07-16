@@ -1,12 +1,12 @@
 ---
 title: Path from NGINX to Python script through uWSGI or gunicorn
 keywords: http server, python, wsgi, NGINX, uwsgi, gunicorn
-description: Overview how request go from web server (NGINX) through uWSGI or gunicorn to Python script and how response gets back.
+description: Overview how request go from web server (NGINX) through uWSGI or gunicorn to Python script.
 ---
 
 # HTTP Server to Python script
 
-While there are many tutorials how to setup NGINX with uWSGI or gunicorn and Python code, almost none of them give an overview how request goes from NGINX to Python and how response goes back.
+While there are many tutorials how to setup NGINX with uWSGI or gunicorn and Python code, almost none of them give an overview how request goes from NGINX to Python.
 
 ## Input
 
