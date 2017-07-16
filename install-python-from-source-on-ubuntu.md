@@ -49,3 +49,20 @@ To create virtual environment, use absolute path to Python:
 ```
 /usr/local/Python3.6.1/bin/python -m venv path/to/env
 ```
+
+### Installing uWSGI and other binary packages
+
+uWSGI installation into freshly created virtual environment may end up with following error:
+
+```
+gcc: error: /home/george/ll/env/lib/python3.6/config-3.6m/libpython3.6.a: No such file or directory
+```
+
+Root cause of this problem is unclear.
+
+It can be solved by creating a symbolic to static Python lib:
+
+```
+mkdir -p /home/george/ll/env/lib/python3.6/config-3.6m
+ln -s /usr/local/Python-3.6.1/libpython3.6m.a /home/george/ll/env/lib/python3.6/config-3.6m/libpython3.6.a
+```
