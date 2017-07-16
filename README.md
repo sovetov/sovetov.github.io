@@ -1,2 +1,3 @@
 # georgesovetov.github.io
-George Sovetov's blog
+
+Visit George Sovetov's blog at https://georgesovetov.github.io.
