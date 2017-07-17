@@ -16,6 +16,12 @@ There may emerge some problems and questions though:
 
 Python 3.6.1 will be used as an example.
 
+## Compiler
+
+```
+sudo apt-get install build-essential
+```
+
 ## Dependencies for Tkinter, sqlite3 and others
 
 ```
