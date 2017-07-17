@@ -22,6 +22,12 @@ Python 3.6.1 will be used as an example.
 sudo apt-get install build-essential
 ```
 
+Or, for yum:
+
+```
+yum install make automake gcc gcc-c++ kernel-devel
+```
+
 ## Dependencies for Tkinter, sqlite3 and others
 
 ```
