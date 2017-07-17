@@ -23,6 +23,13 @@ sudo apt-get install tk8.6-dev  # For Tkinter. (tcl8.6-dev is dependency).
 sudo apt-get install libsqlite3-dev  # For sqlite3.
 ```
 
+For yum commands are:
+
+```
+yum install sqlite-devel
+yum install tk-devel
+```
+
 There are another modules, e.g. dbm and gdbm, for which other dependencies must be installed. 
 
 ## Install to `/usr/local/`
