@@ -31,19 +31,19 @@ yum install make automake gcc gcc-c++ kernel-devel
 ## Dependencies for Tkinter, sqlite3 and others
 
 ```
+sudo apt-get install libssl-dev  # PIP won't work without it.
+sudo apt-get install zlib1g-dev  # PIP won't work without it.
 sudo apt-get install tk8.6-dev  # For Tkinter. (tcl8.6-dev is dependency).
 sudo apt-get install libsqlite3-dev  # For sqlite3.
-sudo apt-get install zlib1g-dev
-sudo apt-get install libssl-dev
 ```
 
 For yum commands are:
 
 ```
+sudo yum install openssl-devel  # PIP won't work without it.
+sudo yum install zlib-devel  # PIP won't work without it.
 sudo yum install sqlite-devel
 sudo yum install tk-devel
-sudo yum install zlib-devel
-sudo yum install openssl-devel
 ```
 
 There are another modules, e.g. dbm and gdbm, for which other dependencies must be installed. 
