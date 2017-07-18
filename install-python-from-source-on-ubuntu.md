@@ -43,7 +43,7 @@ For yum commands are:
 sudo yum install sqlite-devel
 sudo yum install tk-devel
 sudo yum install zlib-devel
-sudo yum install -y openssl-devel
+sudo yum install openssl-devel
 ```
 
 There are another modules, e.g. dbm and gdbm, for which other dependencies must be installed. 
