@@ -33,13 +33,15 @@ yum install make automake gcc gcc-c++ kernel-devel
 ```
 sudo apt-get install tk8.6-dev  # For Tkinter. (tcl8.6-dev is dependency).
 sudo apt-get install libsqlite3-dev  # For sqlite3.
+sudo apt-get install zlib1g-dev
 ```
 
 For yum commands are:
 
 ```
-yum install sqlite-devel
-yum install tk-devel
+sudo yum install sqlite-devel
+sudo yum install tk-devel
+sudo yum install zlib-devel
 ```
 
 There are another modules, e.g. dbm and gdbm, for which other dependencies must be installed. 
