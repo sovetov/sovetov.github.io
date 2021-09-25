@@ -12,9 +12,13 @@ The client laptop's OS is Windows 10 Enterprise.
 It's the most powerful version of Windows.
 But you don't even need to enable WinRM service on it to use it as a client.
 
-# quickconfig
+# Useful Links
 
-## First run
+- http://www.hurryupandwait.io/blog/understanding-and-troubleshooting-winrm-connection-and-authentication-a-thrill-seekers-guide-to-adventure
+- http://www.hurryupandwait.io/blog/safely-running-windows-automation-operations-that-typically-fail-over-winrm-or-powershell-remoting
+- https://powershell.one/ 
+
+# Configure Server Machine with `winrm quickconfig`
 
 ```
 C:\Users\gsovetov>winrm quickconfig
@@ -37,10 +41,9 @@ Error number:  -2144108526 0x80338012
 The client cannot connect to the destination specified in the request. Verify that the service on the destination is running and is accepting requests. Consult the logs and documentation for the WS-Management service running on the destination, most commonly IIS or WinRM. If the destination is the WinRM service, run the following command on the destination to analyze and configure the WinRM service: "winrm quickconfig".
 ```
 
-## Admin console
+## Run cmd.exe as Administrator
 
 Find "cmd" in Start Menu and Shift+Ctrl+Enter on it. Or Run as Administrator in the context menu.
-
 ```
 C:\Windows\system32>winrm quickconfig
 WinRM is not set up to receive requests on this machine.
@@ -72,7 +75,6 @@ You may also try running quickconfig with "-quiet"
 (GUI images here)
 
 Or in PowerShell:
-
 ```
 PS C:\Users\gsovetov> Get-NetConnectionProfile
 
@@ -100,7 +102,7 @@ PS C:\Windows\system32> Set-NetConnectionProfile -InterfaceIndex 3 -NetworkCateg
 PS C:\Windows\system32> Set-NetConnectionProfile -InterfaceIndex 17 -NetworkCategory Private
 ```
 
-## quickconfig
+## It Works!
 
 ```
 C:\Windows\system32>winrm quickconfig
@@ -122,11 +124,11 @@ Configured LocalAccountTokenFilterPolicy to grant administrative rights remotely
 
 Works!
 
-# Check it
+# Check WinRM from Client Laptop
 
 Check from another machine. 127.0.0.1 is never checked by the firewall on Windows.
 
-The easiest way to me is to take another Windows laptop connected to the same local network.
+The easiest way to me is to take another Windows laptop connected to the same local network and run some command.
 
 ## Find out your IP address
 
@@ -173,11 +175,10 @@ Ethernet adapter Bluetooth Network Connection:
    Connection-specific DNS Suffix  . :
 ```
 
-## Connect from another machine
+## Try First Time
 
 Let's query WinRM client connection settings on your machine from the client laptop.
 (We'll soon alter them on the client laptop.)
-
 ```
 C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138
 WSManFault
@@ -187,7 +188,7 @@ Error number:  -2144108316 0x803380E4
 The WinRM client cannot process the request. If the authentication scheme is different from Kerberos, or if the client computer is not joined to a domain, then HTTPS transport must be used or the destination machine must be added to the TrustedHosts configuration setting. Use winrm.cmd to configure TrustedHosts. Note that computers in the TrustedHosts list might not be authenticated. You can get more information about that by running the following command: winrm help config.
 ```
 
-## See TrustedHosts on the client laptop in the registry (easy way)
+## Set Trusted Hosts on Client Laptop in the Registry (Easy Way)
 
 Open `regedit`.
 Navigate to `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WSMAN\Client`.
@@ -195,9 +196,8 @@ Add `trusted_hosts` String value (`REG_SZ`) with value `192.168.1.138`.
 
 This don't require setting up WinRM.
 
-### Via the `winrm` command (not necessary)
+## Set Trusted Hosts on Client Laptop with the `winrm` Command (Not Necessary)
 
-This is not necessary.
 Doing that in the registry is enough.
 
 ```
@@ -209,8 +209,7 @@ Error number:  -2144108526 0x80338012
 The client cannot connect to the destination specified in the request. Verify that the service on the destination is running and is accepting requests. Consult the logs and documentation for the WS-Management service running on the destination, most commonly IIS or WinRM. If the destination is the WinRM service, run the following command on the destination to analyze and configure the WinRM service: "winrm quickconfig".
 ```
 
-It doesn't work because WinRM service is not running. `winrm quickconfig` helps.
-
+It doesn't work because WinRM service is not running. `winrm quickconfig` helps:
 ```
 C:\Users\gsovetov>winrm g winrm/config
 WSManFault
@@ -227,8 +226,7 @@ Even if you're is in the `BUILTIN\Administrators` group,
 you cannot access the whole config object
 because UAC removes administrator privilegies from the security context.
 
-You can access the `client` part though.
-
+You can access the `client` part though:
 ```
 C:\Users\gsovetov>winrm g winrm/config/client
 Client
@@ -248,10 +246,9 @@ Client
     TrustedHosts  192.168.1.138
 ```
 
-## Authentication
+# Authentication
 
 This is what you see with the incorrect password:
-
 ```
 C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138 -u:gsovetov -p:qwe
 WSManFault
@@ -259,7 +256,6 @@ WSManFault
 ```
 
 With the correct password:
-
 ```
 C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138 -u:gsovetov -p:PaSsW0Rd
 Client
@@ -280,8 +276,7 @@ Client
 ```
 
 Windows uses local credentials to connect to the remote machine
-if you don't specify any.
-
+if you don't specify any:
 ```
 C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138
 Client
@@ -304,25 +299,19 @@ Client
 # Example: Get current time from the remote machine
 
 Here you'll see how to discover and explore WMI classes.
-
 Some pages or websites may go unavailable in future.
 That's why I'll tell you what to search for.
 
-Search for `windows wmi current time` on the internet.
-
-You'll find this: https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmi-tasks--dates-and-times .
-
-Look at the code. There's `Win32_OperatingSystem` WMI class.
-
-Search for it on the internet `"Win32_OperatingSystem"`. Quotes tell the search engine not to interpret the name as several words.
-
-You'll find: https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem .
-There are various data about the OS.
-Including the current time.
-Let's query it remotely.
+- Search for `windows wmi current time` on the internet.
+- You'll find: https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmi-tasks--dates-and-times .
+- Look at the code. There's `Win32_OperatingSystem` WMI class.
+- Search for it on the internet `"Win32_OperatingSystem"`. Quotes tell the search engine not to interpret the name as several words.
+- You'll find: https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem .
+- There are various data about the OS. Including the current time. We'll query it remotely.
 
 A class is identified with its URL.
 This class' URL is `http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_OperatingSystem`.
+(Find it in the class' documentation.)
 Let's query it.
 
 ```
