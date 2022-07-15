@@ -476,7 +476,7 @@ Error number:  -2147024891 0x80070005
 Access is denied.
 ```
 
-You need administrator privilegies to modify the service config, to read the server config or the whole config.
+You need administrator privilegies to modify the service config, to read the service config or the whole config.
 
 ```
 C:\Windows\system32>winrm set winrm/config/service @{AllowUnencrypted="true"}
@@ -518,3 +518,12 @@ Win32_OperatingSystem
 ```
 
 It works!
+
+# Authenticating other clients
+
+## Enable Basic authentication
+
+You need administrator privilegies to modify the service config.
+```
+C:\Windows\system32>winrm set winrm/config/service/auth @{Basic="true"}
+```
