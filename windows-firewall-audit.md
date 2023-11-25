@@ -3,7 +3,9 @@
 ## Examine configuration
 
 ```cmd
-C:\Windows\System32>auditpol /get /category:"Object Access"
+auditpol /get /category:"Object Access"
+```
+```
 System audit policy
 Category/Subcategory                      Setting
 Object Access
@@ -26,32 +28,41 @@ Object Access
 ## Enable
 
 ```cmd
-C:\Windows\System32>auditpol /set /subcategory:"Filtering Platform Packet Drop" /success:enable /failure:enable
+auditpol /set /subcategory:"Filtering Platform Packet Drop" /success:enable /failure:enable
+```
+```
 The command was successfully executed.
 ```
 
 ```cmd
-C:\Windows\System32>auditpol /set /subcategory:"Filtering Platform Connection" /success:enable /failure:enable
+auditpol /set /subcategory:"Filtering Platform Connection" /success:enable /failure:enable
+```
+```
 The command was successfully executed.
 ```
 
 ## Disable
 
 ```cmd
-C:\Windows\security\database>auditpol /set /subcategory:"Filtering Platform Connection" /success:disable /failure:disable
+auditpol /set /subcategory:"Filtering Platform Connection" /success:disable /failure:disable
+```
+```
 The command was successfully executed.
 ```
 
 ```cmd
-C:\Windows\security\database>auditpol /set /subcategory:"Filtering Platform Packet Drop" /success:disable /failure:disable
+auditpol /set /subcategory:"Filtering Platform Packet Drop" /success:disable /failure:disable
+```
+```
 The command was successfully executed.
 ```
 
 ## View events in PowerShell with `Get-EventLog`
 
 ```powershell
-PS C:\WINDOWS\system32> Get-EventLog -LogName Security -After (Get-Date).AddMinutes(-1) -Source @("Microsoft-Windows-Security-Auditing") -InstanceId @(5150..5159)
-
+Get-EventLog -LogName Security -After (Get-Date).AddMinutes(-1) -Source @("Microsoft-Windows-Security-Auditing") -InstanceId @(5150..5159)
+```
+```
    Index Time          EntryType   Source                 InstanceID Message
    ----- ----          ---------   ------                 ---------- -------
  5755787 Nov 26 00:14  FailureA... Microsoft-Windows...         5157 The Windows Filtering Platform has blocked a connection....
@@ -64,14 +75,14 @@ PS C:\WINDOWS\system32> Get-EventLog -LogName Security -After (Get-Date).AddMinu
 ## View events in PowerShell with `Get-WinEvent`
 
 ```powershell
-PS C:\WINDOWS\system32> Get-WinEvent -FilterHashtable @{
->>   Logname='Security'
->>   ProviderName='Microsoft-Windows-Security-Auditing'
->>   ID=@(5150..5159)
->>   StartTime=(Get-Date).AddMinutes(-5)
->> }
-
-
+Get-WinEvent -FilterHashtable @{
+  Logname='Security'
+  ProviderName='Microsoft-Windows-Security-Auditing'
+  ID=@(5150..5159)
+  StartTime=(Get-Date).AddMinutes(-5)
+}
+```
+```
    ProviderName: Microsoft-Windows-Security-Auditing
 
 TimeCreated                      Id LevelDisplayName Message
@@ -95,16 +106,16 @@ TimeCreated                      Id LevelDisplayName Message
 
 ## View events in PowerShell with `Get-WinEvent` using XML filter
 
+```powershell
+Get-WinEvent -FilterXML @'
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and ( (EventID &gt;= 5150 and EventID &lt;= 5159) ) and TimeCreated[timediff(@SystemTime) &lt;= 300000]]]</Select>
+  </Query>
+</QueryList>
+'@
 ```
-PS C:\WINDOWS\system32> Get-WinEvent -FilterXML @'
->> <QueryList>
->>   <Query Id="0" Path="Security">
->>     <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and ( (EventID &gt;= 5150 and EventID &lt;= 5159) ) and TimeCreated[timediff(@SystemTime) &lt;= 300000]]]</Select>
->>   </Query>
->> </QueryList>
->> '@
-
-
+```
    ProviderName: Microsoft-Windows-Security-Auditing
 
 TimeCreated                      Id LevelDisplayName Message

@@ -20,8 +20,10 @@ Useful links:
 
 # Configure Server Machine with `winrm quickconfig`
 
+```cmd
+winrm quickconfig
 ```
-C:\Users\gsovetov>winrm quickconfig
+```
 WinRM is not set up to receive requests on this machine.
 The following changes must be made:
 
@@ -44,8 +46,10 @@ The client cannot connect to the destination specified in the request. Verify th
 ## Run cmd.exe as Administrator
 
 Find "cmd" in Start Menu and Shift+Ctrl+Enter on it. Or Run as Administrator in the context menu.
+```cmd
+winrm quickconfig
 ```
-C:\Windows\system32>winrm quickconfig
+```
 WinRM is not set up to receive requests on this machine.
 The following changes must be made:
 
@@ -75,10 +79,10 @@ You may also try running quickconfig with "-quiet"
 (GUI images here)
 
 Or in PowerShell:
+```powershell
+Get-NetConnectionProfile
 ```
-PS C:\Users\gsovetov> Get-NetConnectionProfile
-
-
+```
 Name             : ..........................
 InterfaceAlias   : Wi-Fi
 InterfaceIndex   : 3
@@ -97,15 +101,19 @@ IPv6Connectivity : NoTraffic
 
 The following works only when PowerShell is running as administrator. (Same, search for "PowerShell" in the Start Menu and then Shift+Ctrl+Enter.)
 
+```powershell
+Set-NetConnectionProfile -InterfaceIndex 3 -NetworkCategory Private
 ```
-PS C:\Windows\system32> Set-NetConnectionProfile -InterfaceIndex 3 -NetworkCategory Private
-PS C:\Windows\system32> Set-NetConnectionProfile -InterfaceIndex 17 -NetworkCategory Private
+```powershell
+Set-NetConnectionProfile -InterfaceIndex 17 -NetworkCategory Private
 ```
 
 ## It Works!
 
+```cmd
+winrm quickconfig
 ```
-C:\Windows\system32>winrm quickconfig
+```
 WinRM service is already running on this machine.
 WinRM is not set up to allow remote access to this machine for management.
 The following changes must be made:
@@ -132,9 +140,10 @@ The easiest way to me is to take another Windows laptop connected to the same lo
 
 ## Find out your IP address
 
+```cmd
+ipconfig
 ```
-C:\Users\gsovetov>ipconfig
-
+```
 Windows IP Configuration
 
 
@@ -179,8 +188,10 @@ Ethernet adapter Bluetooth Network Connection:
 
 Let's query WinRM client connection settings on your machine from the client laptop.
 (We'll soon alter them on the client laptop.)
+```cmd
+winrm g winrm/config/client -r:192.168.1.138
 ```
-C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138
+```
 WSManFault
     Message The WinRM client cannot process the request. If the authentication scheme is different from Kerberos, or if the client computer is not joined to a domain, then HTTPS transport must be used or the destination machine must be added to the TrustedHosts configuration setting. Use winrm.cmd to configure TrustedHosts. Note that computers in the TrustedHosts list might not be authenticated. You can get more information about that by running the following command: winrm help config.
 
@@ -200,8 +211,10 @@ This don't require setting up WinRM.
 
 Doing that in the registry is enough.
 
+```cmd
+winrm g winrm/config/client
 ```
-C:\Users\gsovetov>winrm g winrm/config/client
+```
 WSManFault
     Message The client cannot connect to the destination specified in the request. Verify that the service on the destination is running and is accepting requests. Consult the logs and documentation for the WS-Management service running on the destination, most commonly IIS or WinRM. If the destination is the WinRM service, run the following command on the destination to analyze and configure the WinRM service: "winrm quickconfig".
 
@@ -210,8 +223,10 @@ The client cannot connect to the destination specified in the request. Verify th
 ```
 
 It doesn't work because WinRM service is not running. `winrm quickconfig` helps:
+```cmd
+winrm g winrm/config
 ```
-C:\Users\gsovetov>winrm g winrm/config
+```
 WSManFault
     Message
         ProviderFault
@@ -227,8 +242,10 @@ you cannot access the whole config object
 because UAC removes administrator privilegies from the security context.
 
 You can access the `client` part though:
+```cmd
+winrm g winrm/config/client
 ```
-C:\Users\gsovetov>winrm g winrm/config/client
+```
 Client
     NetworkDelayms 5000
     URLPrefix wsman
@@ -249,15 +266,19 @@ Client
 # Authentication
 
 This is what you see with the incorrect password:
+```cmd
+winrm g winrm/config/client -r:192.168.1.138 -u:gsovetov -p:qwe
 ```
-C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138 -u:gsovetov -p:qwe
+```
 WSManFault
     Message Access is denied.
 ```
 
 With the correct password:
+```cmd
+winrm g winrm/config/client -r:192.168.1.138 -u:gsovetov -p:PaSsW0Rd
 ```
-C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138 -u:gsovetov -p:PaSsW0Rd
+```
 Client
     NetworkDelayms 5000
     URLPrefix wsman
@@ -277,8 +298,10 @@ Client
 
 Windows uses local credentials to connect to the remote machine
 if you don't specify any:
+```cmd
+winrm g winrm/config/client -r:192.168.1.138
 ```
-C:\Users\gsovetov>winrm g winrm/config/client -r:192.168.1.138
+```
 Client
     NetworkDelayms 5000
     URLPrefix wsman
@@ -314,8 +337,10 @@ This class' URL is `http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win
 (Find it in the class' documentation.)
 Let's query it.
 
+```cmd
+winrm get http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_OperatingSystem
 ```
-C:\Users\gsovetov>winrm get http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_OperatingSystem
+```
 Win32_OperatingSystem
     BootDevice \Device\HarddiskVolume1
     BuildNumber 19043
@@ -330,7 +355,7 @@ An alias is replaced with its URL, which become the prefix of the full URL.
 Refer to `winrm help aliases`.
 
 All the following commands produce the same output:
-```
+```cmd
 winrm get http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_OperatingSystem
 winrm get winrm/wmi/root/cimv2/Win32_OperatingSystem
 winrm get wsman/wmi/root/cimv2/Win32_OperatingSystem
@@ -340,7 +365,7 @@ winrm get wmicimv2/Win32_OperatingSystem
 
 `get` can be abbreviated as `g`.
 The following commands produce the same output:
-```
+```cmd
 winrm get wmicimv2/Win32_OperatingSystem
 winrm g wmicimv2/Win32_OperatingSystem
 ```
@@ -358,7 +383,7 @@ See more examples in `winrm help get` and `winrm help enumerate`.
 
 Command that manipulated the config above used the `winrm` alias and queried the client config.
 The following commands produce the same result:
-```
+```cmd
 winrm g winrm/config/client
 winrm g http://schemas.microsoft.com/wbem/wsman/1/config/client
 ```
@@ -373,8 +398,10 @@ Run it over HTTP and capture traffic with Wireshark, Network Monitor or Message 
 HTTP connections are called "unencrypted" in the WinRM terminology.
 Allow unencrypted connections on the client and the server.
 
+```cmd
+winrm get wmicimv2/Win32_OperatingSystem -r:192.168.1.138 -un
 ```
-C:\Users\gsovetov>winrm get wmicimv2/Win32_OperatingSystem -r:192.168.1.138 -un
+```
 WSManFault
     Message The WinRM client cannot process the request. Unencrypted traffic is currently disabled in the client configuration. Change the client configuration and try the request again.
 
@@ -393,8 +420,10 @@ Value data: 1
 
 ## Allow on the client with the `winrm` command
 
+```cmd
+winrm set winrm/config/client @{AllowUnencrypted="true"}
 ```
-C:\Users\gsovetov>winrm set winrm/config/client @{AllowUnencrypted="true"}
+```
 WSManFault
     Message Access is denied.
 
@@ -406,8 +435,10 @@ Administrative privilegies are required to modify the client config.
 (Without the privilegies, you can only read it .)
 
 Run `cmd.exe` as administrator and try again:
+```cmd
+winrm set winrm/config/client @{AllowUnencrypted="true"}
 ```
-C:\Windows\system32>winrm set winrm/config/client @{AllowUnencrypted="true"}
+```
 Client
     NetworkDelayms 5000
     URLPrefix wsman
@@ -427,8 +458,10 @@ Client
 
 ## Try again after unencrypted connections are allowed on the client side
 
+```cmd
+winrm get wmicimv2/Win32_OperatingSystem -r:192.168.1.138 -un
 ```
-C:\Users\gsovetov>winrm get wmicimv2/Win32_OperatingSystem -r:192.168.1.138 -un
+```
 WSManFault
     Message Access is denied.
 
@@ -440,8 +473,10 @@ Unencrypted connections seem to be prohibited on the server side too.
 
 ## Allow unencrypted on the server side
 
+```cmd
+winrm set winrm/config/service @{AllowUnencrypted="true"}
 ```
-C:\Users\gsovetov>winrm set winrm/config/service @{AllowUnencrypted="true"}
+```
 WSManFault
     Message
         ProviderFault
@@ -452,8 +487,10 @@ Error number:  -2147024891 0x80070005
 Access is denied.
 ```
 
+```cmd
+winrm g winrm/config/service
 ```
-C:\Users\gsovetov>winrm g winrm/config/service
+```
 WSManFault
     Message
         ProviderFault
@@ -464,8 +501,10 @@ Error number:  -2147024891 0x80070005
 Access is denied.
 ```
 
+```cmd
+winrm g winrm/config
 ```
-C:\Users\gsovetov>winrm g winrm/config
+```
 WSManFault
     Message
         ProviderFault
@@ -478,8 +517,10 @@ Access is denied.
 
 You need administrator privilegies to modify the service config, to read the service config or the whole config.
 
+```cmd
+winrm set winrm/config/service @{AllowUnencrypted="true"}
 ```
-C:\Windows\system32>winrm set winrm/config/service @{AllowUnencrypted="true"}
+```
 Service
     RootSDDL O:NSG:BAD:P(A;;GA;;;BA)(A;;GR;;;IU)S:P(AU;FA;GA;;;WD)(AU;SA;GXGW;;;WD)
     MaxConcurrentOperations 4294967295
@@ -508,8 +549,10 @@ Service
 
 ## Try with unencrypted connect allowed on the server
 
+```cmd
+winrm get wmicimv2/Win32_OperatingSystem -r:192.168.1.138 -un
 ```
-C:\Users\gsovetov>winrm get wmicimv2/Win32_OperatingSystem -r:192.168.1.138 -un
+```
 Win32_OperatingSystem
     BootDevice \Device\HarddiskVolume1
     BuildNumber 19043
@@ -524,6 +567,6 @@ It works!
 ## Enable Basic authentication
 
 You need administrator privilegies to modify the service config.
-```
-C:\Windows\system32>winrm set winrm/config/service/auth @{Basic="true"}
+```cmd
+winrm set winrm/config/service/auth @{Basic="true"}
 ```
