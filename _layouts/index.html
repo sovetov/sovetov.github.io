@@ -4,7 +4,7 @@ layout: default
 
 <ul>
     {%- for p in site.pages -%}
-    {%- if p == page -%}
+    {%- if p.name == page.name -%}
         {%- continue -%}
     {%- endif -%}
     {% assign ext = p.name | split: '.' | last %}
