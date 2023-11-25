@@ -47,7 +47,7 @@ C:\Windows\security\database>auditpol /set /subcategory:"Filtering Platform Pack
 The command was successfully executed.
 ```
 
-## View events in PowerShell
+## View events in PowerShell with `Get-EventLog`
 
 ```powershell
 PS C:\WINDOWS\system32> Get-EventLog -LogName Security -After (Get-Date).AddMinutes(-1) -Source @("Microsoft-Windows-Security-Auditing") -InstanceId @(5150..5159)
@@ -61,6 +61,28 @@ PS C:\WINDOWS\system32> Get-EventLog -LogName Security -After (Get-Date).AddMinu
  5755783 Nov 26 00:14  FailureA... Microsoft-Windows...         5157 The Windows Filtering Platform has blocked a connection....
 ```
 
+## View events in PowerShell with `Get-WinEvent`
+
+```powershell
+PS C:\WINDOWS\system32> Get-WinEvent -FilterHashtable @{
+>>   Logname='Security'
+>>   ProviderName='Microsoft-Windows-Security-Auditing'
+>>   ID=@(5150..5159)
+>>   StartTime=(Get-Date).AddMinutes(-5)
+>> }
+
+
+   ProviderName: Microsoft-Windows-Security-Auditing
+
+TimeCreated                      Id LevelDisplayName Message
+-----------                      -- ---------------- -------
+2023-11-26 0:21:02             5157 Information      The Windows Filtering Platform has blocked a connection....
+2023-11-26 0:21:02             5152 Information      The Windows Filtering Platform has blocked a packet....
+2023-11-26 0:21:02             5158 Information      The Windows Filtering Platform has permitted a bind to a local port....
+2023-11-26 0:21:02             5157 Information      The Windows Filtering Platform has blocked a connection....
+2023-11-26 0:21:02             5152 Information      The Windows Filtering Platform has blocked a packet....
+```
+
 ## XML filter for Event Viewer
 
 ```xml
@@ -69,4 +91,27 @@ PS C:\WINDOWS\system32> Get-EventLog -LogName Security -After (Get-Date).AddMinu
     <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and ( (EventID &gt;= 5150 and EventID &lt;= 5159) ) and TimeCreated[timediff(@SystemTime) &lt;= 300000]]]</Select>
   </Query>
 </QueryList>
+```
+
+## View events in PowerShell with `Get-WinEvent` using XML filter
+
+```
+PS C:\WINDOWS\system32> Get-WinEvent -FilterXML @'
+>> <QueryList>
+>>   <Query Id="0" Path="Security">
+>>     <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and ( (EventID &gt;= 5150 and EventID &lt;= 5159) ) and TimeCreated[timediff(@SystemTime) &lt;= 300000]]]</Select>
+>>   </Query>
+>> </QueryList>
+>> '@
+
+
+   ProviderName: Microsoft-Windows-Security-Auditing
+
+TimeCreated                      Id LevelDisplayName Message
+-----------                      -- ---------------- -------
+2023-11-26 0:16:22             5156 Information      The Windows Filtering Platform has permitted a connection....
+2023-11-26 0:16:22             5156 Information      The Windows Filtering Platform has permitted a connection....
+2023-11-26 0:16:21             5156 Information      The Windows Filtering Platform has permitted a connection....
+2023-11-26 0:16:21             5156 Information      The Windows Filtering Platform has permitted a connection....
+2023-11-26 0:16:21             5156 Information      The Windows Filtering Platform has permitted a connection....
 ```
