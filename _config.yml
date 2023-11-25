@@ -1,7 +1,11 @@
-title: George Sovetov
+author: George Sovetov
+title: George Sovetov's blog
+tagline: Programming, devops, administration
 description: Blog on various aspects of software engineering
 google_analytics: G-1WBXB55FDD
-remote_theme: pages-themes/minimal@v0.2.0
-plugins:
-- jekyll-remote-theme
-layout: post
+favicon:
+  url: https://gravatar.com/avatar/0913ba1b86763ca0ae2c4ea4fa2dc07013028c30af76a90d372bd3b8b6cf7841
+  type: image/png
+global_links:
+  - text: sovetov.pro
+    url: https://sovetov.pro/

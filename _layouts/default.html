@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', '{{ google_analytics }}');
+    </script>
+    <meta charset="utf-8">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="icon" type="{{ favicon.type }}" href="{{ favicon.url }}">
+    {% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        nav>ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav>ul>li {
+            display: inline;
+        }
+
+        nav>ul>li:after {
+            content: " | ";
+        }
+
+        nav>ul>li:last-child:after {
+            content: "";
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ site.url }}">{{ site.url }}</a></li>
+                {% for link in site.global_link %}
+                <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {{ content }}
+    </main>
+</body>
+
+</html>
