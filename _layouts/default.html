@@ -41,7 +41,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="{{ site.url }}">{{ site.url | split '//' | slice 1, 100500 | join '//' }}</a></li>
+                <li><a href="{{ site.url }}">{{ site.url | split: '//' | slice: 1, 100500 | join: '//' }}</a></li>
                 {% for link in site.global_links %}
                 <li><a href="{{ link.url }}">{{ link.text }}</a></li>
                 {% endfor %}
