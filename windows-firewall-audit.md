@@ -46,3 +46,13 @@ The command was successfully executed.
 C:\Windows\security\database>auditpol /set /subcategory:"Filtering Platform Packet Drop" /success:disable /failure:disable
 The command was successfully executed.
 ```
+
+## XML filter for Event Viewer
+
+```xml
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and ( (EventID &gt;= 5150 and EventID &lt;= 5159) ) and TimeCreated[timediff(@SystemTime) &lt;= 300000]]]</Select>
+  </Query>
+</QueryList>
+```
