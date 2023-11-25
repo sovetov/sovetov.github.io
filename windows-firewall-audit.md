@@ -47,6 +47,20 @@ C:\Windows\security\database>auditpol /set /subcategory:"Filtering Platform Pack
 The command was successfully executed.
 ```
 
+## View events in PowerShell
+
+```powershell
+PS C:\WINDOWS\system32> Get-EventLog -LogName Security -After (Get-Date).AddMinutes(-5) -InstanceId @(5150..5159)
+
+   Index Time          EntryType   Source                 InstanceID Message
+   ----- ----          ---------   ------                 ---------- -------
+ 5753396 Nov 26 00:06  SuccessA... Microsoft-Windows...         5156 The Windows Filtering Platform has permitted a connection....
+ 5753395 Nov 26 00:06  SuccessA... Microsoft-Windows...         5156 The Windows Filtering Platform has permitted a connection....
+ 5753394 Nov 26 00:06  SuccessA... Microsoft-Windows...         5156 The Windows Filtering Platform has permitted a connection....
+ 5753392 Nov 26 00:06  SuccessA... Microsoft-Windows...         5156 The Windows Filtering Platform has permitted a connection....
+ 5753391 Nov 26 00:06  SuccessA... Microsoft-Windows...         5158 The Windows Filtering Platform has permitted a bind to a local port....
+```
+
 ## XML filter for Event Viewer
 
 ```xml
