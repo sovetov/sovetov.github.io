@@ -4,6 +4,12 @@ layout: default
 
 <ul>
     {%- for p in site.pages -%}
+    {%- if p == page -%}
+        {%- continue -%}
+    {%- endif -%}
+    {%- if p.name | split: '.' | last != 'md' -%}
+        {%- continue -%}
+    {%- endif -%}
     <li><a href="{{ p.url }}">{{ p.title }}</a></li>
     {%- endfor -%}
 </ul>
