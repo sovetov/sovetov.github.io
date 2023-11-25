@@ -1,3 +1,7 @@
+---
+layout: post
+---
+
 # WinRM &ndash; Configuration, Pitfalls and Examples
 
 To catch all the potential issues,
