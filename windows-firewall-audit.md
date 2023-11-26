@@ -150,3 +150,43 @@ DestAddress     DestPort ProcessID Application
 20.190.177.148  443      2860      \device\harddiskvolume3\windows\system32\svchost.exe
 20.190.177.149  443      2860      \device\harddiskvolume3\windows\system32\svchost.exe
 ```
+
+## View programs with command line
+
+```powershell
+filter Extend-WinEvent {
+    $dom = [xml]$_.ToXml()
+    foreach ($datum in $dom.Event.EventData.Data) {
+        Add-Member -InputObject $_ NoteProperty $datum.Name $datum.'#text' -Force
+    }
+    $_
+}
+filter Extend-Process {
+    $processId = $_.ProcessId
+    $application = $_.Application
+    try {
+        $object = [wmi]"Win32_Process.Handle=""$processId"""
+        $applicationOrCommandLine = $object.CommandLine
+    }
+    catch {
+        $applicationOrCommandLine = $application
+    }
+    Add-Member -InputObject $_ NoteProperty 'ApplicationOrCommandLine' $applicationOrCommandLine
+    $_
+}
+Get-WinEvent -FilterHashtable @{Logname='Security'; ID=5157; StartTime=(Get-Date).AddSeconds(-300)} |
+    Extend-WinEvent |
+    Extend-Process |
+    select DestAddress,DestPort,ProcessID,ApplicationOrCommandLine |
+    sort * -Unique |
+    ft -AutoSize
+```
+```
+DestAddress     DestPort ProcessID ApplicationOrCommandLine                                                          
+-----------     -------- --------- ------------------------                                                          
+23.200.162.90   443      10232     "C:\Users\gsovetov\AppData\Local\Microsoft\BingWallpaperApp\BingWallpaperApp.exe" 
+239.255.255.250 1900     3872      C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p -s SSDPSRV   
+88.221.17.175   443      9192      C:\WINDOWS\System32\svchost.exe -k netsvcs -p -s BITS                             
+239.255.255.250 3702     3004      dashost.exe {bba43f3f-aec2-484a-9aafd54002107856}                                 
+ff02::c         3702     3004      dashost.exe {bba43f3f-aec2-484a-9aafd54002107856}                                 
+```
