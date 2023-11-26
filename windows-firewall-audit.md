@@ -126,3 +126,27 @@ TimeCreated                      Id LevelDisplayName Message
 2023-11-26 0:16:21             5156 Information      The Windows Filtering Platform has permitted a connection....
 2023-11-26 0:16:21             5156 Information      The Windows Filtering Platform has permitted a connection....
 ```
+
+## View programs that failed to connect
+
+```powershell
+filter Extend-WinEvent {
+    $dom = [xml]$_.ToXml()
+    foreach ($datum in $dom.Event.EventData.Data) {
+        Add-Member -InputObject $_ NoteProperty $datum.Name $datum.'#text' -Force
+    }
+    $_
+}
+
+Get-WinEvent -FilterHashtable @{Logname='Security'; ID=5157; StartTime=(Get-Date).AddSeconds(-300)} |
+    Extend-WinEvent |
+    select DestAddress,DestPort,ProcessID,Application |
+    sort * -Unique
+```
+```
+DestAddress     DestPort ProcessID Application                                         
+-----------     -------- --------- -----------                                         
+20.190.177.147  443      2860      \device\harddiskvolume3\windows\system32\svchost.exe
+20.190.177.148  443      2860      \device\harddiskvolume3\windows\system32\svchost.exe
+20.190.177.149  443      2860      \device\harddiskvolume3\windows\system32\svchost.exe
+```
