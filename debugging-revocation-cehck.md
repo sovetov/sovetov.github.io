@@ -245,7 +245,7 @@ type "C:\Windows\System32\LogFiles\Firewall\pfirewall.log"
 
 ## lsass.exe does the request, Firewall audit indicates
 
-[./windows-firewall-audit.md]
+[Read on Firewall audit]({% link windows-firewall-audit.md %}).
 
 ```powershell
 C:\WINDOWS\system32> filter Extend-WinEvent {
