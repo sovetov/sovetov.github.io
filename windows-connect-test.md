@@ -66,6 +66,7 @@ PolicyAppId                   :
 ```powershell
 (Get-NetFirewallRule | ? { $_.DisplayName -contains 'netprofm' }) | Get-NetFirewallServiceFilter
 ```
+```
 Service : netprofm
 ```
 ```powershell
