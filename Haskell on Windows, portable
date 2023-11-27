@@ -1,0 +1,19 @@
+# Haskell on Windows, portable
+
+Based on: https://www.haskell.org/ghcup/install/
+
+Principles (most important first):
+- Understand what is going on
+- Verify where possible
+- Portable (non-invasive)
+- Automated where possible
+
+- MSYS2
+    - Download a self-extracting archive from https://github.com/msys2/msys2-installer/releases
+    - For example, https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-base-x86_64-20231026.sfx.exe
+    - Verify checksum: `certutil -hashfile msys2-base-x86_64-20231026.sfx.exe sha256`
+    - Extract by running executable `msys2-base-x86_64-20231026.sfx.exe`
+- GHCup
+    - Download from https://downloads.haskell.org/~ghcup/
+    - For example, https://downloads.haskell.org/~ghcup/0.1.20.0/x86_64-mingw64-ghcup-0.1.20.0.exe
+    - Or by the URL to the latest version https://downloads.haskell.org/~ghcup/x86_64-mingw64-ghcup.exe
