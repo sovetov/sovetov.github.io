@@ -13,7 +13,9 @@ It's the most powerful version of Windows.
 But you don't even need to enable WinRM service on it to use it as a client.
 
 See: <http://www.hurryupandwait.io/blog/understanding-and-troubleshooting-winrm-connection-and-authentication-a-thrill-seekers-guide-to-adventure>
+
 See: <http://www.hurryupandwait.io/blog/safely-running-windows-automation-operations-that-typically-fail-over-winrm-or-powershell-remoting>
+
 See: <https://powershell.one/>
 
 # Configure Server Machine with `winrm quickconfig`
