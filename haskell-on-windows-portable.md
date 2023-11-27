@@ -1,6 +1,6 @@
 # Haskell on Windows, portable
 
-Based on: https://www.haskell.org/ghcup/install/
+Based on: <https://www.haskell.org/ghcup/install/>
 
 Principles (most important first):
 - Understand what is going on
@@ -15,9 +15,9 @@ Principles (most important first):
 
 ### Download and unpack
 
-Download a self-extracting archive from https://github.com/msys2/msys2-installer/releases
+Download a self-extracting archive from <https://github.com/msys2/msys2-installer/releases>.
 
-For example, https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-base-x86_64-20231026.sfx.exe
+For example, <https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-base-x86_64-20231026.sfx.exe>.
 
 Verify checksum:
 ```
@@ -196,9 +196,9 @@ error: failed to synchronize all databases (download library error)
 ```
 
 ## GHCup
-    - Download from https://downloads.haskell.org/~ghcup/
-    - For example, https://downloads.haskell.org/~ghcup/0.1.20.0/x86_64-mingw64-ghcup-0.1.20.0.exe
-    - Or by the URL to the latest version https://downloads.haskell.org/~ghcup/x86_64-mingw64-ghcup.exe
+    - Download from <https://downloads.haskell.org/~ghcup/>
+    - For example, <https://downloads.haskell.org/~ghcup/0.1.20.0/x86_64-mingw64-ghcup-0.1.20.0.exe>
+    - Or by the URL to the latest version <https://downloads.haskell.org/~ghcup/x86_64-mingw64-ghcup.exe>
 ## Environment variables from the official instruction
     - `set PATH=%PATH%;c:\Users\gsovetov\Documents\haskell\ghcup\bin`
     - `set GHCUP_INSTALL_BASE_PREFIX=c:\Users\gsovetov\Documents\haskell\ghcup`

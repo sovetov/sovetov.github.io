@@ -1,8 +1,10 @@
 # NCSI - Windows Internet connection test
 
-See: https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview
-See: https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network
-See: https://superuser.com/q/1650052/174311
+See: <https://learn.microsoft.com/en-us/windows-server/networking/ncsi/ncsi-overview>
+
+See: <https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network>
+
+See: <https://superuser.com/q/1650052/174311>
 
 ## Default settings in Registry
 

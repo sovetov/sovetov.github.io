@@ -326,10 +326,10 @@ Some pages or websites may go unavailable in future.
 That's why I'll tell you what to search for.
 
 - Search for `windows wmi current time` on the internet.
-- You'll find: https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmi-tasks--dates-and-times .
+- You'll find: <https://docs.microsoft.com/en-us/windows/win32/wmisdk/wmi-tasks--dates-and-times>.
 - Look at the code. There's `Win32_OperatingSystem` WMI class.
 - Search for it on the internet `"Win32_OperatingSystem"`. Quotes tell the search engine not to interpret the name as several words.
-- You'll find: https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem .
+- You'll find: <https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem>.
 - There are various data about the OS. Including the current time. We'll query it remotely.
 
 A class is identified with its URL.

@@ -50,7 +50,7 @@ There are another modules, e.g. dbm and gdbm, for which other dependencies must 
 
 ## Install to `/usr/local/`
 
-Install to `/usr/local/` as prescribed at https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s09.html.
+Install to `/usr/local/` as prescribed at <https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s09.html>.
 
 Don't nest it to avoid complicated directories structure.
 
