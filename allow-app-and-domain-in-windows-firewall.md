@@ -11,12 +11,11 @@ function Allow-DomainName {
         $addresses = (Resolve-DnsName $domain -Type A).IPAddress
         $filename = Split-Path $app -Leaf
         $name = "$group - $filename - $domain"
-        $rule = New-NetFirewallRule -Name $name -DisplayName $name -Enabled True -Direction Outbound -Action Allow -RemoteAddress $addresses
+        $rule = New-NetFirewallRule -Name $name -DisplayName $name -Enabled True -Direction Outbound -Action Allow -RemoteAddress $addresses -Program $app
         $rule.Group = $group
         Set-NetFirewallRule -InputObject $rule
         $rule
-    }
-}
+    }}
 
 $g = "0 Trust"
 
