@@ -22,37 +22,43 @@
             padding: 0;
         }
 
-        main,
-        header {
+        main {
             max-width: 1024px;
-            margin: 0 auto;
         }
 
         header {
-            padding: 1em 0;
+            width: fit-content;
+            margin: 0 auto;
         }
 
         .header {
             background-color: var(--color-canvas-subtle);
+            border-bottom: 1px solid var(--color-border-muted);
         }
 
-        nav>ul {
+        nav>menu {
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
 
-        nav>ul>li {
+        nav>menu>li {
             display: inline;
         }
 
-        nav>ul>li:after {
+        nav>menu>li:after {
             content: " | ";
             color: var(--color-border-default);
         }
 
-        nav>ul>li:last-child:after {
+        nav>menu>li:last-child:after {
             content: "";
+        }
+
+        nav>menu>li>a {
+            font-size: x-large;
+            padding: 0.4em 0 0.6em;
+            display: inline-block;
         }
     </style>
 </head>
@@ -61,12 +67,12 @@
     <div class="header">
         <header>
             <nav>
-                <ul class="no-list">
-                    <li><a href="{{ site.url }}">{{ site.url | split: '//' | slice: 1, 100500 | join: '//' }}</a></li>
+                <menu>
+                    <li><a href="{{ site.url }}">&#x1F92F; {{ site.url | split: '//' | slice: 1, 100500 | join: '//' }}</a></li>
                     {% for link in site.global_links %}
-                    <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+                    <li><a href="{{ link.url }}">&#x1F914; {{ link.text }}</a></li>
                     {% endfor %}
-                </ul>
+                </menu>
             </nav>
         </header>
     </div>
