@@ -36,10 +36,6 @@
             background-color: var(--color-canvas-subtle);
         }
 
-        .markdown-body nav ul {
-            padding: 0;
-        }
-
         nav>ul {
             list-style-type: none;
             margin: 0;
@@ -61,11 +57,11 @@
     </style>
 </head>
 
-<body>
-    <div class=".header">
-        <header class="markdown-body">
+<body class="markdown-body">
+    <div class="header">
+        <header>
             <nav>
-                <ul>
+                <ul class="no-list">
                     <li><a href="{{ site.url }}">{{ site.url | split: '//' | slice: 1, 100500 | join: '//' }}</a></li>
                     {% for link in site.global_links %}
                     <li><a href="{{ link.url }}">{{ link.text }}</a></li>
@@ -74,7 +70,7 @@
             </nav>
         </header>
     </div>
-    <main class="markdown-body">
+    <main>
         {{ content }}
     </main>
 </body>
