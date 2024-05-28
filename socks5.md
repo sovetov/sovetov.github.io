@@ -19,9 +19,7 @@ Optionally add `-v` to show something. Otherwise there is no output.
 ssh alice@example.com -v -N -D 127.0.0.1:1080
 ```
 
-## 2. Create proxy auto-configuration URL (PAC)
-
-## 3. Prepare a `.pac` file - a simple JavaScipt script
+## 2. Prepare a `.pac` file - a simple JavaScipt script
 
 Use proxy for all connections:
 ```
@@ -38,7 +36,7 @@ See: https://learn.microsoft.com/en-us/troubleshoot/developer/browsers/connectiv
 
 Authentication with passowrd is not supported.
 
-## 4. Serve `.pac` locally via HTTP with IIS
+## 3. Serve `.pac` locally via HTTP with IIS
 
 * Open _Turn Windows features on or off_, select and install:
   * _Internet Information Services_
@@ -58,7 +56,7 @@ Authentication with passowrd is not supported.
     * Click the `.pac` file. It should be downloaded.
     * Copy the link address of the `.pac` file via context menu.
 
-## 5. Configure proxy in the system for another user
+## 4. Configure proxy in the system for another user
 
 Run as _Administrator_:
 ```
@@ -69,7 +67,7 @@ Where:
 * `S-1-5-21-1938875136-3881193919-344594422-1002` is user's SID.
 * `HKU\S-1-5-21-1938875136-3881193919-344594422-1002` is user's registry hive. (Each user sees their hive as `HKCU`.)
 
-## 6. Open a browser as this user
+## 5. Open a browser as this user
 
 Tested with Google Chrome and Firefox.
 
@@ -79,7 +77,7 @@ Tested with Google Chrome and Firefox.
 * Choose `Run as different user`. Type username and password of the user.
 * Check you IP address.
 
-## 7. Block browser connections in firewall
+## 6. Block browser connections in firewall
 
 Block the browser completely in firewall. Connections to 127.0.0.0/8 bypass Windows Firewall anyway.
 
