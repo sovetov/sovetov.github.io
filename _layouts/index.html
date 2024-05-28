@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+{{ content }}
 <ul>
     {%- for p in site.pages -%}
     {%- if p.name == page.name -%}
@@ -14,4 +14,3 @@ layout: default
     <li><a href="{{ p.url }}">{{ p.title }}</a></li>
     {%- endfor -%}
 </ul>
-{{ content }}
