@@ -32,6 +32,10 @@ function FindProxyForURL(url, host) {
 
 Although, very sophisticated configurations are possible.
 
+See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file
+
+See: https://learn.microsoft.com/en-us/troubleshoot/developer/browsers/connectivity-navigation/optimize-pac-performance
+
 Authentication with passowrd is not supported.
 
 ## 4. Serve `.pac` locally via HTTP with IIS
