@@ -24,7 +24,7 @@ ssh alice@example.com -v -N -D 127.0.0.1:1080
 ## 3. Prepare a `.pac` file - a simple JavaScipt script
 
 Use proxy for all connections:
-```JavaScipt
+```
 function FindProxyForURL(url, host) {
     return "SOCKS5 127.0.0.1:1080;";
 }
