@@ -1,4 +1,6 @@
-# Disable Edge Startup boost
+# Windows debloat
+
+## Disable Edge Startup boost
 
 Open in Edge: edge://settings/?search=startup
 
@@ -6,13 +8,13 @@ See: https://aka.ms/EdgeStartupBoostFAQ
 
 It constantly tries to connect Internet.
 
-# Disable wlidsvc - Microsoft Account Sign-in Assistant
+## Disable wlidsvc - Microsoft Account Sign-in Assistant
 
 Connects to Internet (login.live.com) constantly.
 
 Live id is not needed.
 
-# ~~Disable netprofm - Network List Service~~
+## ~~Disable netprofm - Network List Service~~
 
 ~~Disables Wi-Fi when it cannot connect to http://www.msftconnecttest.com/ , even if the firewall blocks it.~~
 
@@ -22,11 +24,11 @@ Causes Explorer (Taskbar) to crash on startup.
 
 Consider allowing this service in the Firewall.
 
-# Disable utcsvc - Connected User Experiences and Telemetry
+## Disable utcsvc - Connected User Experiences and Telemetry
 
 Attempts to access Internet (settings-win.data.microsoft.com).
 
-# Remove apps
+## Remove apps
 
 List installed apps:
 ```
@@ -64,22 +66,22 @@ Consider not to remove:
 * `RealtekSemiconductorCorp.RealtekAudioControl_1.26.250.0_neutral_~_dt26b99r8h8gj`
 
 
-# Uninstall AMD drivers
+## Uninstall AMD drivers
 
 It constantly tries to connect Internet and search for updates.
 
-# Uninstall Skype
+## Uninstall Skype
 
 From _Apps > Installed apps_.
 
-# To do:
+## To do:
 
 * Apply recommendations from https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services#bkmk-cortana
 * Allow Internet Printer Protocol (port 631/tcp)
 * Allow or disable SSDP for dashost.exe and chrome.exe
 * Disable Chrome updates (done with Group Policies)
 
-# See also
+## See also
 
 * https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
 * https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/security-compliance-toolkit-10
