@@ -1,11 +1,3 @@
-# Uninstall AMD drivers
-
-It constantly tries to connect Internet and search for updates.
-
-# Uninstall Skype
-
-From _Apps > Installed apps_.
-
 # Disable Edge Startup boost
 
 Open in Edge: edge://settings/?search=startup
@@ -71,6 +63,14 @@ Consider not to remove:
 * `Microsoft.WindowsTerminal_3001.19.10573.0_neutral_~_8wekyb3d8bbwe`
 * `RealtekSemiconductorCorp.RealtekAudioControl_1.26.250.0_neutral_~_dt26b99r8h8gj`
 
+
+# Uninstall AMD drivers
+
+It constantly tries to connect Internet and search for updates.
+
+# Uninstall Skype
+
+From _Apps > Installed apps_.
 
 # To do:
 
