@@ -13,3 +13,8 @@ Check that Chrome sees the setting (no restat needed):
 * See `NetworkServiceSandboxEnabled` appears with policy value `false`
 
 Restart Chrome.
+
+See:
+
+* https://support.google.com/chrome/a/answer/10314655#132&zippy=%2Cchrome#:~:text=Network%20Service%20sandboxed%20on%20Windows
+* https://chromeenterprise.google/policies/#NetworkServiceSandboxEnabled
